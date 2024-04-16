@@ -1,10 +1,9 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct  s_stack
-{
-    int value;
-    t_stack next;
-}   t_stack;
+#include <stdio.h>
+#include "libft/libft.h"
+
+void    parse_args(char **av, t_list *stack_a);
 
 #endif
