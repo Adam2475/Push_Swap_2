@@ -6,7 +6,7 @@
 /*   By: adapassa <adapassa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by adapassa          #+#    #+#             */
-/*   Updated: 2024/04/17 13:56:19 by adapassa         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:08:38 by adapassa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ int		check_duplicates(char **arr, int size)
 		j = i + 1;
 		while (j < size)
 		{
-			if (ft_strncmp(arr[i], ft_strlen(arr[i]), arr[j]) == 0)
+			if (ft_strncmp(arr[i], arr[j], ft_strlen(arr[i])) == 0)
 			{
-				return true;
+				free_matrix(arr);
+				exit(write(1, "duplicate error!\n", 17));
 			}
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 void	free_matrix(char **matrix)
@@ -47,7 +49,7 @@ void	free_matrix(char **matrix)
 	free(matrix);
 }
 
-static	int		count_matrix(char **mat)
+int		count_matrix(char **mat)
 {
 	int	i;
 
@@ -102,6 +104,7 @@ char	**parse_args(char **av, int ac)
 		av_clone = parse_splitter(av);
 	else
 		av_clone = parse_copy(ac, av);
+	check_duplicates(av_clone, count_matrix(av_clone));
 	while (av_clone[j] != NULL)
 	{
 		if (ft_str_isdigit(av_clone[j]))
